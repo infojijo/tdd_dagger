@@ -6,7 +6,7 @@ import android.content.Context;
 import dagger.Binds;
 import dagger.Module;
 
-@Module
+@Module(includes = ViewModelModule.class)
 abstract public class ApplicationModule {
 
     @Binds

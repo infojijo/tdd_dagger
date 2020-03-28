@@ -1,4 +1,4 @@
-package com.cjnet.tdd_sample;
+package com.cjnet.tdd_sample.base;
 
 import android.os.Bundle;
 import android.widget.Toast;
