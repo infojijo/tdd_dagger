@@ -20,5 +20,5 @@ public abstract class ViewModelModule {
 
 
     @Binds
-    abstract ViewModelProvider.Factory bindNewsViewModelFactory(TDDViewModelFactory factory);
+    abstract ViewModelProvider.Factory bindTDDViewModelFactory(TDDViewModelFactory factory);
 }

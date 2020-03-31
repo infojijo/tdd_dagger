@@ -1,5 +1,7 @@
 package com.cjnet.tdd_sample.api;
 
+import com.cjnet.tdd_sample.di.scope.AppScope;
+
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -8,6 +10,7 @@ import javax.inject.Provider;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+@AppScope
 public class TDDViewModelFactory implements ViewModelProvider.Factory {
 
     private static final String TAG = "ViewModelProviderFactor";

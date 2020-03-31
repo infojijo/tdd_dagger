@@ -1,16 +1,24 @@
 package com.cjnet.tdd_sample.api.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class PostsList {
 
-    private List<Posts> list;
+    @SerializedName("results")
+    private List<Posts> results;
 
-    public List<Posts> getList() {
-        return list;
+    public List<Posts> getResults() {
+        return results;
     }
 
-    public void setList(List<Posts> list) {
-        this.list = list;
+    public void setResults(List<Posts> results) {
+        this.results = results;
+    }
+
+    @Override
+    public String toString() {
+        return "ClassPojo [results = " + results + "]";
     }
 }

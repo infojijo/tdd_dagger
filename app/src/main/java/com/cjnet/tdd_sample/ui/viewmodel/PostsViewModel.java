@@ -1,5 +1,7 @@
 package com.cjnet.tdd_sample.ui.viewmodel;
 
+import android.widget.Toast;
+
 import com.cjnet.tdd_sample.api.PostsApiClient;
 import com.cjnet.tdd_sample.api.RxSchedulers;
 import com.cjnet.tdd_sample.api.model.PostsList;
@@ -17,20 +19,20 @@ public class PostsViewModel extends ViewModel {
     private final RxSchedulers rxSingleSchedulers;
     private final MutableLiveData<PostListViewState> newsListState = new MutableLiveData<>();
 
-    public MutableLiveData<PostListViewState> getNewsListState() {
+    public MutableLiveData<PostListViewState> getPostsListState() {
         return newsListState;
     }
+
     @Inject
-    public PostsViewModel(CompositeDisposable disposable,
-                          PostsApiClient apiClient,
+    public PostsViewModel(PostsApiClient apiClient,
                           RxSchedulers rxSingleSchedulers) {
-        this.disposable = new CompositeDisposable();
         this.apiClient = apiClient;
         this.rxSingleSchedulers = rxSingleSchedulers;
+        disposable = new CompositeDisposable();
 
     }
 
-    public void fetchNews() {
+    public void fetchPosts() {
         disposable.add(apiClient.fetchPosts()
                 .doOnEvent((newsList, throwable) -> onLoading())
                 .compose(rxSingleSchedulers.applySchedulers())
@@ -42,6 +44,7 @@ public class PostsViewModel extends ViewModel {
    private void onSuccess(PostsList newsList) {
         PostListViewState.SUCCESS_STATE.setData(newsList);
         newsListState.postValue(PostListViewState.SUCCESS_STATE);
+
     }
 
     private void onError(Throwable error) {
