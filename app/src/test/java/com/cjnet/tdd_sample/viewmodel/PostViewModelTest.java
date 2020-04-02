@@ -35,9 +35,6 @@ public class PostViewModelTest {
     public InstantTaskExecutorRule instantExecutorRule = new InstantTaskExecutorRule();
 
     @Mock
-    ApiEndPoint apiEndPoint;
-
-    @Mock
     PostsApiClient apiClient;
 
     private PostsViewModel viewModel;
@@ -65,20 +62,24 @@ public class PostViewModelTest {
 
     @Test
     public void testApiFetchDataSuccess() {
-        // Mock API response
+        //Mock API response
+        //When there is a api call and return data.
         when(apiClient.fetchPosts()).thenReturn(Single.just(new PostsList()));
+        //ViewModel get data - to post.
         viewModel.fetchPosts();
+        //verify the observer on status changes. - loading
         verify(observer).onChanged(PostListViewState.LOADING_STATE);
+        //success state.
         verify(observer).onChanged(PostListViewState.SUCCESS_STATE);
     }
 
-  /*  @Test
+    @Test
     public void testApiFetchDataError() {
         when(apiClient.fetchPosts()).thenReturn(Single.error(new Throwable("Api error")));
-        viewModel.getPostsListState();
+        viewModel.fetchPosts();
         verify(observer).onChanged(PostListViewState.LOADING_STATE);
         verify(observer).onChanged(PostListViewState.ERROR_STATE);
-    }*/
+    }
 
     @After
     public void tearDown() throws Exception {
